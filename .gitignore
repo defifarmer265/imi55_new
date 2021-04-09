@@ -1,0 +1,5 @@
+application/temp/* 
+.env
+application/modules/users/*
+application/modules/web/*
+application/modules/users_imi55_demo_v1/*

@@ -1,0 +1,879 @@
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<style>
+#cover-spin {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.7);
+    z-index: 9999;
+    display: none;
+}
+#cover-spin1 {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.7);
+    z-index: 9999;
+    display: none;
+}
+.pter{
+  cursor:pointer;
+}
+@-webkit-keyframes spin {
+from {
+-webkit-transform:rotate(0deg);
+}
+to {
+-webkit-transform:rotate(360deg);
+}
+}
+@keyframes spin {
+from {
+transform:rotate(0deg);
+}
+to {
+transform:rotate(360deg);
+}
+}
+#cover-spin::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 48%;
+    top: 40%;
+    width: 40px;
+    height: 40px;
+    border-style: solid;
+    border-color: black;
+    border-top-color: transparent;
+    border-width: 4px;
+    border-radius: 50%;
+    -webkit-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
+}
+</style>
+<div id="cover-spin"></div>
+<div class="right_col" role="main">
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 ">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>รายการ ฝาก - ถอน ช่วงจำนวนเงิน<small></small></h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="row ">
+          <div class="col-sm-2 "> วันเริ่ม
+            <fieldset>
+              <div class="control-group">
+                <div class="controls">
+                  <div class="col-md-12 xdisplay_inputx form-group row has-feedback">
+                    <input type="text" class="form-control has-feedback-left" id="single_cal2" placeholder="First Name" aria-describedby="inputSuccess2Status2">
+                    <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span> <span id="inputSuccess2Status2" class="sr-only">(success)</span> </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-sm-2 "> เวลา
+            <fieldset>
+              <div class="control-group">
+                <div class="controls">
+                  <div class="col-md-12 xdisplay_inputx form-group row has-feedback">
+                    <input type="time" class="form-control has-feedback-left" value="11:00:00" id="time1">
+
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="col-sm-2"> วันสิ้นสุด
+            <fieldset>
+              <div class="control-group">
+                <div class="controls">
+                  <div class="col-md-12 xdisplay_inputx form-group row has-feedback">
+                    <input type="text" class="form-control has-feedback-left" id="single_cal3" placeholder="First Name" aria-describedby="inputSuccess2Status2">
+                    <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span> <span id="inputSuccess2Status2" class="sr-only">(success)</span> </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-sm-2 "> เวลา
+            <fieldset>
+              <div class="control-group">
+                <div class="controls">
+                  <div class="col-md-12 xdisplay_inputx form-group row has-feedback">
+                    <input type="time" class="form-control has-feedback-left" value="11:00:00" id="time2">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-sm-2"><br>
+          <select class="btn border"   id="slectop">
+          <option value="all" selected>ทั้งหมด</option>
+              <option value="num_dep" >รายการฝาก</option>
+              <option value="sum_dep">จำนวนเงินฝาก</option>
+              <option value="num_wit">รายการถอน</option>
+              <option value="sum_wit">จำนวนเงินถอน</option>  
+          </select>
+          </div>
+          <div class="col-sm-2"><br>
+            <button onClick="select_period()" class="btn btn-info"><i class="fa fa-search"></i> ค้นหา </button>
+          </div>
+        </div>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <div class="col-md-12 col-sm-12 ">
+          <div class="x_content">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card-box table-responsive">
+                  <table id="emp_table"  class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" style="font-size: 14px;">
+                    <thead  style="background-color: #2a3f54;color: #fff;" >
+                      <tr class="text-center">
+                        <th> ช่วงจำนวนเงิน </th>
+                        <th class="num_dep all box"> รายการฝาก </th>
+                        <th class="sum_dep all box"> จำนวนเงินฝาก </th>
+                        <th class="num_wit all box"> รายการถอน </th>
+                        <th class="sum_wit all box"> จำนวนเงินถอน </th>
+                      </tr>
+                    </thead>
+                    <!-- <tbody id="bodysum"></tbody> -->
+                    <tbody id="bodyhistory"></tbody>
+                    
+                  </table>
+                </div>
+                <div class="row" id = "list"></div>
+              </div> 
+                      <div class="col-sm-9">
+                        <div class="card-box table-responsive">
+                            <table  class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" style="font-size: 14px;">
+                              <thead>
+                                <!-- <tr class="text-center">
+                                  <th> ลำดับ</th>
+                                  <th > User</th>
+                                  <th > จำนวนเงินฝาก</th>
+                                  <th > วันที่ </th>
+                                </tr> -->
+                              </thead>
+                              <!-- <tbody id="bodysum"></tbody> -->
+                              <tbody id="bodytrdep"></tbody>
+                              
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).on('user',function(e) {
+      if(e.which == 13) {
+          alert('You pressed enter!');
+      }
+  });
+  function select_period()
+    {
+      $('#cover-spin').show();
+      $('#bodyhistory').html('');
+      // $('#bodysum').html('');
+      var dt1 = $('#single_cal2').val();
+      var dt2 = $('#single_cal3').val();
+      var tm1 = $('#time1').val();
+      var tm2 = $('#time2').val();
+      var dt3 = $('#slectop').val();
+      // console.log(dt3);
+    if(dt3=='all'){
+      console.log('12345');
+    }
+        $.ajax({
+          url: '<?=base_url()?>backend/period/rp_us',
+          type: 'POST',
+          dataType: 'json',
+          data: {dt1:dt1,dt2:dt2,dt3:dt3,tm1:tm1,tm2:tm2},
+        })
+        .done(function(res) {
+          console.log(res);
+          if (res.code == 1) {
+                      // console.log(res.data);
+            if(res.data.length >= 1 ){
+              var conut 	= res.data.length;
+              var wd 		= res.data;
+              var content = '';
+              var tt_num_dp = 0;
+              var tt_sum_dp = 0;
+              var tt_num_wd = 0;
+              var tt_sum_wd = 0;
+              var tt_all = 0;
+              var tt_tota = 0;
+              console.log(dt1);
+              for(var i=0; i < conut; i++){
+                var num_dep300   	=  parseFloat(wd[i]['num_dep300']);
+                var sum_dep300   	=  parseFloat(wd[i]['sum_dep300']);
+                var num_wd300   	=  parseFloat(wd[i]['num_wd300']);
+                var sum_wd300  	=  parseFloat(wd[i]['sum_wd300']);
+
+                var num_dep1000   	=  parseFloat(wd[i]['num_dep1000']);
+                var sum_dep1000   	=  parseFloat(wd[i]['sum_dep1000']);
+                var num_wd1000   	=  parseFloat(wd[i]['num_wd1000']);
+                var sum_wd1000  	=  parseFloat(wd[i]['sum_wd1000']);
+
+                var num_dep5000   	=  parseFloat(wd[i]['num_dep5000']);
+                var sum_dep5000   	=  parseFloat(wd[i]['sum_dep5000']);
+                var num_wd5000   	=  parseFloat(wd[i]['num_wd5000']);
+                var sum_wd5000  	=  parseFloat(wd[i]['sum_wd5000']);
+
+                var num_dep10000   	=  parseFloat(wd[i]['num_dep10000']);
+                var sum_dep10000   	=  parseFloat(wd[i]['sum_dep10000']);
+                var num_wd10000   	=  parseFloat(wd[i]['num_wd10000']);
+                var sum_wd10000  	=  parseFloat(wd[i]['sum_wd10000']);
+
+                var num_dep50000   	=  parseFloat(wd[i]['num_dep50000']);
+                var sum_dep50000   	=  parseFloat(wd[i]['sum_dep50000']);
+                var num_wd50000   	=  parseFloat(wd[i]['num_wd50000']);
+                var sum_wd50000  	=  parseFloat(wd[i]['sum_wd50000']);
+
+                var num_dep100000   	=  parseFloat(wd[i]['num_dep100000']);
+                var sum_dep100000   	=  parseFloat(wd[i]['sum_dep100000']);
+                var num_wd100000   	=  parseFloat(wd[i]['num_wd100000']);
+                var sum_wd100000  	=  parseFloat(wd[i]['sum_wd100000']);
+
+                var num_dep100000up   	=  parseFloat(wd[i]['num_dep100000+']);
+                var sum_dep100000up   	=  parseFloat(wd[i]['sum_dep100000+']);
+                var num_wd100000up   	=  parseFloat(wd[i]['num_wd100000+']);
+                var sum_wd100000up  	=  parseFloat(wd[i]['sum_wd100000+']);
+
+                tt_num_dp = tt_num_dp + num_dep300+num_dep1000+num_dep5000+num_dep10000+num_dep50000+num_dep100000+num_dep100000up;
+              	tt_sum_dp = tt_sum_dp + sum_dep300+sum_dep1000+sum_dep5000+sum_dep10000+sum_dep50000+sum_dep100000+sum_dep100000up;
+              	tt_num_wd = tt_sum_wd + num_wd300+num_wd1000+num_wd5000+num_wd10000+num_wd50000+num_wd100000+num_wd100000up;
+              	tt_sum_wd = tt_sum_wd + sum_wd300+sum_wd1000+sum_wd5000+sum_wd10000+sum_wd50000+sum_wd100000+sum_wd100000up;
+                if(dt3=='all'){
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> <= 300 </td>';
+                                  content += '<td class=" hid text-right">'+'<a  data-money ="300" onClick="select_dep(this)" class="text-primary pter" style="ptext-decoration: underline;" target="_blank">'+nb(num_dep300)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep300.toFixed(2))+'</td>';
+                                  content += '<td class=" hid text-right">'+'<a  data-money ="300" onClick=" select_withdraw(this)" class="text-primary pter" style="ptext-decoration: underline;" target="_blank">'+nb(num_wd300)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd300.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 301 - 1,000 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money1 ="301" data-money2 ="1000" onClick="select_dep1(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep1000)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep1000.toFixed(2))+'</td>';
+                                  content += '<td class=" hid text-right">'+'<a  data-money1 ="301" data-money2 ="1000" onClick=" select_withdraw1(this)" class="text-primary pter" style="ptext-decoration: underline;" target="_blank">'+nb(num_wd1000)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd1000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 1,001 - 5,000 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money1 ="1001" data-money2 ="5000" onClick="select_dep1(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep5000)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep5000.toFixed(2))+'</td>';
+                                  content += '<td class=" hid text-right">'+'<a  data-money1 ="1001" data-money2 ="5000" onClick=" select_withdraw1(this)" class="text-primary pter" style="ptext-decoration: underline;" target="_blank">'+nb(num_wd5000)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd5000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 5,001 - 10,000 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money1 ="5001" data-money2 ="10000" onClick="select_dep1(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep10000)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep10000.toFixed(2))+'</td>';
+                                  content += '<td class=" hid text-right">'+'<a  data-money1 ="5001" data-money2 ="10000" onClick=" select_withdraw1(this)" class="text-primary pter" style="ptext-decoration: underline;" target="_blank">'+nb(num_wd10000)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd10000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 10,001 - 50,000 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money1 ="10001" data-money2 ="50000" onClick="select_dep1(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep50000)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep50000.toFixed(2))+'</td>';
+                                  content += '<td class=" hid text-right">'+'<a  data-money1 ="10001" data-money2 ="50000" onClick=" select_withdraw1(this)" class="text-primary pter" style="ptext-decoration: underline;" target="_blank">'+nb(num_wd50000)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd50000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 50,001 - 100,000 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money1 ="50001" data-money2 ="100000" onClick="select_dep1(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep100000)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep100000.toFixed(2))+'</td>';
+                                  content += '<td class=" hid text-right">'+'<a  data-money1 ="50001" data-money2 ="100000" onClick=" select_withdraw1(this)" class="text-primary pter" style="ptext-decoration: underline;" target="_blank">'+nb(num_wd100000)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd100000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 100,000 ขึ้นไป </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money ="100000" onClick="select_dep2(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep100000up)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep100000up.toFixed(2))+'</td>';
+                                  content += '<td class=" hid text-right">'+'<a  data-money ="100000"  onClick=" select_withdraw2(this)" class="text-primary pter" style="ptext-decoration: underline;" target="_blank">'+nb(num_wd100000up)+'</a>'+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd100000up.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> รวม </td>';
+                                  content += '<td class=" hid text-right text-primary">'+nb(tt_num_dp)+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(tt_sum_dp .toFixed(2))+'</td>';
+                                  content += '<td class=" hid text-right text-primary">'+nb(tt_num_wd)+'</td>';
+                                  content += '<td class=" hid text-right">'+nb(tt_sum_wd.toFixed(2))+'</td>';
+                content += '</tr>';
+           }     
+           else if(dt3 == 'num_dep'){
+                  content += '<tr>';
+                                  content += '<td class=" hid text-right"> <= 300 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money ="300" onClick="select_dep(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep300)+'</a>'+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 301 - 1,000 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money1 ="301" data-money2 ="1000" onClick="select_dep1(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep1000)+'</a>'+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 1,001 - 5,000 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money1 ="1001" data-money2 ="5000" onClick="select_dep1(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep5000)+'</a>'+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 5,001 - 10,000 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money1 ="5001" data-money2 ="10000" onClick="select_dep1(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep10000)+'</a>'+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 10,001 - 50,000 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money1 ="10001" data-money2 ="50000" onClick="select_dep1(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep50000)+'</a>'+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 50,001 - 100,000 </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money1 ="50001" data-money2 ="100000" onClick="select_dep1(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep100000)+'</a>'+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 100,000 ขึ้นไป </td>';
+                                  content += '<td class=" hid text-right">'+'<a data-money ="100000" onClick="select_dep2(this)" class="text-primary pter" style="ptext-decoration: underline;">'+nb(num_dep100000up)+'</a>'+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right" > รวม </td>';
+                                  content += '<td class=" hid text-right text-primary">'+nb(tt_num_dp)+'</td>';
+                content += '</tr>';
+           }
+           else if(dt3 == 'sum_dep'){
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> <= 300 </td>';
+                                  content += '<td class=" hid  text-right">'+nb(sum_dep300.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 301 - 1,000 </td>';
+                                  content += '<td class=" hid  text-right">'+nb(sum_dep1000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 1,001 - 5,000 </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep5000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 5,001 - 10,000 </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep10000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 10,001 - 50,000 </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep50000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 50,001 - 100,000 </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_dep100000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class="hid text-right"> 100,000 ขึ้นไป </td>';
+                                  content += '<td class="hid  text-right">'+nb(sum_dep100000up.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right" > รวม </td>';
+                                  content += '<td class=" hid text-right">'+nb(tt_sum_dp .toFixed(2))+'</td>';
+
+                content += '</tr>';
+           }
+           else if(dt3=='num_wit'){
+            content += '<tr>';
+                                  content += '<td class=" hid text-right"> <= 300 </td>';
+                                  content += '<td  data-money ="300" onClick=" select_withdraw(this)" class=" hid text-right text-primary pter">'+nb(num_wd300)+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 301 - 1,000 </td>';
+                                  content += '<td  data-money1 ="301" data-money2 ="1000" onClick=" select_withdraw1(this)" class=" hid text-right text-primary pter">'+nb(num_wd1000)+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 1,001 - 5,000 </td>';
+                                  content += '<td  data-money1 ="1001" data-money2 ="5000" onClick=" select_withdraw1(this)" class=" hid text-right text-primary pter">'+nb(num_wd5000)+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 5,001 - 10,000 </td>';
+                                  content += '<td  data-money1 ="5001" data-money2 ="10000" onClick=" select_withdraw1(this)" class=" hid text-right text-primary pter">'+nb(num_wd10000)+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 10,001 - 50,000 </td>';
+                                  content += '<td  data-money1 ="10001" data-money2 ="50000" onClick=" select_withdraw1(this)" class=" hid text-right text-primary pter">'+nb(num_wd50000)+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 50,001 - 100,000 </td>';
+                                  content += '<td  data-money1 ="50001" data-money2 ="10000" onClick=" select_withdraw1(this)" class=" hid text-right text-primary pter">'+nb(num_wd100000)+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 100,000 ขึ้นไป </td>';
+                                  content += '<td data-money1 ="100000" onClick=" select_withdraw2(this)" class=" hid text-right text-primary pter" >'+nb(num_wd100000up)+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right" > รวม </td>';
+                                  content += '<td class=" hid text-right text-primary ">'+nb(tt_num_wd)+'</td>';
+                content += '</tr>';
+           }
+           else if(dt3=='sum_wit'){
+            content += '<tr>';
+                                  content += '<td class=" hid text-right"> <= 300 </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd300.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 301 - 1,000 </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd1000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 1,001 - 5,000 </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd5000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 5,001 - 10,000 </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd10000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 10,001 - 50,000 </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd50000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 50,001 - 100,000 </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd100000.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right"> 100,000 ขึ้นไป </td>';
+                                  content += '<td class=" hid text-right">'+nb(sum_wd100000up.toFixed(2))+'</td>';
+                content += '</tr>';
+                content += '<tr>';
+                                  content += '<td class=" hid text-right" > รวม </td>';
+                                  content += '<td class=" hid text-right">'+nb(tt_sum_wd.toFixed(2))+'</td>';
+                content += '</tr>';
+           }
+          }
+              
+            }else{
+              var content = 'No data';
+              var sum = '';
+            }
+            // $('#bodysum').html(sum);
+            $('#bodyhistory').html(content);
+          }else{
+            swal(res.title,res.msg,'error');
+          }
+          $('#cover-spin').hide();
+          
+        })
+        .fail(function() {
+          console.log("error");
+        });
+	}
+
+  $(document).ready(function(){
+    $("select").change(function(){
+        $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+            console.log(optionValue);
+            if(optionValue){
+                $(".box").not("." + optionValue).hide();
+                $(".hid").not("." + optionValue).hide();
+                $("." + optionValue).show();
+            } else{
+                $(".box").hide();
+            }
+        });
+    }).change();
+});
+	function nb(x) {
+     var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
+function select_dep(d){
+  $('#cover-spin1').show();
+  $('#bodytrdep').html('');
+  $('#list').html('');
+  var money = $(d).data('money');
+  var dt1 = $('#single_cal2').val();
+  var dt2 = $('#single_cal3').val();
+ console.log(dt1);
+ console.log(dt2);
+ $.ajax({
+          url: '<?=base_url()?>backend/List_dep/list_deposit',
+          type: 'POST',
+          dataType: 'json',
+          data: {dt1:dt1,dt2:dt2,money:money},
+        })
+        .done(function(res) {
+          // console.log(res.data.user.date);
+          if (res.code == 1) {
+                      // console.log(res.data);
+            if(res.data.user.length >= 1 ){
+              var conut 	= res.data.user.length;
+              var wd 		= res.data.user;
+              var content = '';
+              var con= '';
+              // console.log(dt1);
+                con += '<div  class="x_title col-9">';
+                con += '<h2>รายการฝาก ช่วงจำนวนเงินฝาก <= 300</h2>';
+                con += '</div>';
+                content += '<tr  style="background-color: #2a3f54;color: #fff;">';
+                                  content += '<th class="text-center" >ลำดับ</td>';
+                                  content += '<th class="text-center" >User</td>';
+                                  content += '<th class="text-center" >จำนวนฝาก</td>';
+                                  content += '<th class="text-center" >วันที่ฝาก</td>';
+                                  content += '<th class="text-center" >เวลาที่ฝาก</td>';
+                content += '</tr>';
+              for(var i=0; i < conut; i++){
+                var date = new Date(wd[i].dateCreate* 1000).format('d-m-Y');
+                var time = new Date(wd[i].dateCreate* 1000).format('H:i:s');
+                // console.log(wd[i].user);
+                content += '<tr>';
+                                  content += '<td class="text-center">'+(i+1)+' </td>';
+                                  content += '<td class="text-right">'+wd[i].user+' </td>';
+                                  content += '<td class="text-right">'+wd[i].deposit+' </td>';
+                                  content += '<td class="text-right">'+date+' </td>';
+                                  content += '<td class="text-right">'+time+' </td>';
+                content += '</tr>';
+             }
+            }else{
+              var content = 'No data';
+            }
+            // $('#bodysum').html(sum);
+            $('#bodytrdep').html(content);
+            $('#list').html(con);
+            // $('#head').html(content);
+          }else{
+            swal(res.title,res.msg,'error');
+          }
+          $('#cover-spin1').hide();
+          
+        })
+        .fail(function() {
+          console.log("error");
+        });
+}
+function select_dep1(d){
+  $('#cover-spin1').show();
+  $('#bodytrdep').html('');
+  $('#list').html('');
+  var money1 = $(d).data('money1');
+  var money2 = $(d).data('money2');
+  var dt1 = $('#single_cal2').val();
+  var dt2 = $('#single_cal3').val();
+ console.log(dt1);
+ console.log(dt2);
+ $.ajax({
+          url: '<?=base_url()?>backend/List_dep/list_deposit1',
+          type: 'POST',
+          dataType: 'json',
+          data: {dt1:dt1,dt2:dt2,money1:money1,money2:money2},
+        })
+        .done(function(res) {
+          // console.log(res.data.user.date);
+          if (res.code == 1) {
+                      // console.log(res.data);
+            if(res.data.user.length >= 1 ){
+              var conut 	= res.data.user.length;
+              var wd 		= res.data.user;
+              var content = '';
+              var con= '';
+              // console.log(dt1);
+                con += '<div  class="x_title col-9">';
+                con += '<h2>รายการฝาก ช่วงจำนวนเงินฝาก '+money1+' - '+money2+'</h2>';
+                con += '</div>';
+                content += '<tr  style="background-color: #2a3f54;color: #fff;">';
+                                  content += '<th class="text-center" >ลำดับ</td>';
+                                  content += '<th class="text-center" >User</td>';
+                                  content += '<th class="text-center" >จำนวนฝาก</td>';
+                                  content += '<th class="text-center" >วันที่ฝาก</td>';
+                                  content += '<th class="text-center" >เวลาที่ฝาก</td>';
+                content += '</tr>';
+              for(var i=0; i < conut; i++){
+                var date = new Date(wd[i].dateCreate* 1000).format('d-m-Y');
+                var time = new Date(wd[i].dateCreate* 1000).format('H:i:s');
+                // console.log(wd[i].user);
+                content += '<tr>';
+                                  content += '<td class="text-center">'+(i+1)+' </td>';
+                                  content += '<td class="text-right">'+wd[i].user+' </td>';
+                                  content += '<td class="text-right">'+wd[i].deposit+' </td>';
+                                  content += '<td class="text-right">'+date+' </td>';
+                                  content += '<td class="text-right">'+time+' </td>';
+                content += '</tr>';
+             }
+            }else{
+              var content = 'No data';
+            }
+            // $('#bodysum').html(sum);
+            $('#bodytrdep').html(content);
+            $('#list').html(con);
+            // $('#head').html(content);
+          }else{
+            swal(res.title,res.msg,'error');
+          }
+          $('#cover-spin1').hide();
+          
+        })
+        .fail(function() {
+          console.log("error");
+        });
+}
+function select_dep2(d){
+  $('#cover-spin1').show();
+  $('#bodytrdep').html('');
+  $('#list').html('');
+  var money = $(d).data('money');
+  var dt1 = $('#single_cal2').val();
+  var dt2 = $('#single_cal3').val();
+ console.log(dt1);
+ console.log(dt2);
+ $.ajax({
+          url: '<?=base_url()?>backend/List_dep/list_deposit2',
+          type: 'POST',
+          dataType: 'json',
+          data: {dt1:dt1,dt2:dt2,money:money},
+        })
+        .done(function(res) {
+          // console.log(res.data.user.date);
+          if (res.code == 1) {
+                      // console.log(res.data);
+            if(res.data.user.length >= 1 ){
+              var conut 	= res.data.user.length;
+              var wd 		= res.data.user;
+              var content = '';
+              var con= '';
+              // console.log(dt1);
+                con += '<div  class="x_title col-9">';
+                con += '<h2>รายการฝาก ช่วงจำนวนเงินฝาก '+money+' ขึ้นไป</h2>';
+                con += '</div>';
+                content += '<tr  style="background-color: #2a3f54;color: #fff;">';
+                                  content += '<th class="text-center" >ลำดับ</td>';
+                                  content += '<th class="text-center" >User</td>';
+                                  content += '<th class="text-center" >จำนวนฝาก</td>';
+                                  content += '<th class="text-center" >วันที่ฝาก</td>';
+                                  content += '<th class="text-center" >เวลาที่ฝาก</td>';
+                content += '</tr>';
+              for(var i=0; i < conut; i++){
+                var date = new Date(wd[i].dateCreate* 1000).format('d-m-Y');
+                var time = new Date(wd[i].dateCreate* 1000).format('H:i:s');
+                // console.log(wd[i].user);
+                content += '<tr>';
+                                  content += '<td class="text-center">'+(i+1)+' </td>';
+                                  content += '<td class="text-right">'+wd[i].user+' </td>';
+                                  content += '<td class="text-right">'+wd[i].deposit+' </td>';
+                                  content += '<td class="text-right">'+date+' </td>';
+                                  content += '<td class="text-right">'+time+' </td>';
+                content += '</tr>';
+             }
+            }else{
+              var content = 'No data';
+            }
+            // $('#bodysum').html(sum);
+            $('#bodytrdep').html(content);
+            $('#list').html(con);
+            // $('#head').html(content);
+          }else{
+            swal(res.title,res.msg,'error');
+          }
+          $('#cover-spin1').hide();
+          
+        })
+        .fail(function() {
+          console.log("error");
+        });
+}
+function select_withdraw(d){
+  $('#cover-spin1').show();
+  $('#bodytrdep').html('');
+  $('#list').html('');
+  var money = $(d).data('money');
+  var dt1 = $('#single_cal2').val();
+  var dt2 = $('#single_cal3').val();
+ console.log(dt1);
+ console.log(dt2);
+ console.log(money);
+ $.ajax({
+          url: '<?=base_url()?>backend/List_dep/list_withdraw',
+          type: 'POST',
+          dataType: 'json',
+          data: {dt1:dt1,dt2:dt2,money:money},
+        })
+        .done(function(res) {
+          // console.log(res.data.user.date);
+          if (res.code == 1) {
+                      // console.log(res.data);
+            if(res.data.user.length >= 1 ){
+              var conut 	= res.data.user.length;
+              var wd 		= res.data.user;
+              var content = '';
+              var con= '';
+              // console.log(dt1);
+                con += '<div  class="x_title col-9">';
+                con += '<h2>รายการถอน ช่วงจำนวนเงินถอน <= '+money+'</h2>';
+                con += '</div>';
+                content += '<tr  style="background-color: #2a3f54;color: #fff;">';
+                                  content += '<th class="text-center" >ลำดับ</td>';
+                                  content += '<th class="text-center" >User</td>';
+                                  content += '<th class="text-center" >จำนวนถอน</td>';
+                                  content += '<th class="text-center" >วันที่ถอน</td>';
+                                  content += '<th class="text-center" >เวลาที่ถอน</td>';
+                content += '</tr>';
+              for(var i=0; i < conut; i++){
+                var date = new Date(wd[i].dateCreate* 1000).format('d-m-Y');
+                var time = new Date(wd[i].dateCreate* 1000).format('H:i:s');
+                // console.log(wd[i].user);
+                content += '<tr>';
+                                  content += '<td class="text-center">'+(i+1)+' </td>';
+                                  content += '<td class="text-right">'+wd[i].user+' </td>';
+                                  content += '<td class="text-right">'+wd[i].withdraw+' </td>';
+                                  content += '<td class="text-right">'+date+' </td>';
+                                  content += '<td class="text-right">'+time+' </td>';
+                content += '</tr>';
+             }
+            }else{
+              var content = 'No data';
+            }
+            // $('#bodysum').html(sum);
+            $('#bodytrdep').html(content);
+            $('#list').html(con);
+            // $('#head').html(content);
+          }else{
+            swal(res.title,res.msg,'error');
+          }
+          $('#cover-spin1').hide();
+          
+        })
+        .fail(function() {
+          console.log("error");
+        });
+}
+function select_withdraw1(d){
+  $('#cover-spin1').show();
+  $('#bodytrdep').html('');
+  $('#list').html('');
+  var money1 = $(d).data('money1');
+  var money2 = $(d).data('money2');
+  var dt1 = $('#single_cal2').val();
+  var dt2 = $('#single_cal3').val();
+ console.log(dt1);
+ console.log(dt2);
+ $.ajax({
+          url: '<?=base_url()?>backend/List_dep/list_withdraw1',
+          type: 'POST',
+          dataType: 'json',
+          data: {dt1:dt1,dt2:dt2,money1:money1,money2:money2},
+        })
+        .done(function(res) {
+          // console.log(res.data.user.date);
+          if (res.code == 1) {
+                      // console.log(res.data);
+            if(res.data.user.length >= 1 ){
+              var conut 	= res.data.user.length;
+              var wd 		= res.data.user;
+              var content = '';
+              var con= '';
+              // console.log(dt1);
+                con += '<div  class="x_title col-9">';
+                con += '<h2>รายการถอน ช่วงจำนวนเงินถอน '+money1+' - '+money2+'</h2>';
+                con += '</div>';
+                content += '<tr  style="background-color: #2a3f54;color: #fff;">';
+                                  content += '<th class="text-center" >ลำดับ</td>';
+                                  content += '<th class="text-center" >User</td>';
+                                  content += '<th class="text-center" >จำนวนถอน</td>';
+                                  content += '<th class="text-center" >วันที่ถอน</td>';
+                                  content += '<th class="text-center" >เวลาที่ถอน</td>';
+                content += '</tr>';
+              for(var i=0; i < conut; i++){
+                var date = new Date(wd[i].dateCreate* 1000).format('d-m-Y');
+                var time = new Date(wd[i].dateCreate* 1000).format('H:i:s');
+                // console.log(wd[i].user);
+                content += '<tr>';
+                                  content += '<td class="text-center">'+(i+1)+' </td>';
+                                  content += '<td class="text-right">'+wd[i].user+' </td>';
+                                  content += '<td class="text-right">'+wd[i].withdraw+' </td>';
+                                  content += '<td class="text-right">'+date+' </td>';
+                                  content += '<td class="text-right">'+time+' </td>';
+                content += '</tr>';
+             }
+            }else{
+              var content = 'No data';
+            }
+            // $('#bodysum').html(sum);
+            $('#bodytrdep').html(content);
+            $('#list').html(con);
+            // $('#head').html(content);
+          }else{
+            swal(res.title,res.msg,'error');
+          }
+          $('#cover-spin1').hide();
+          
+        })
+        .fail(function() {
+          console.log("error");
+        });
+}
+function select_withdraw2(d){
+  $('#cover-spin1').show();
+  $('#bodytrdep').html('');
+  $('#list').html('');
+  var money = $(d).data('money');
+  var dt1 = $('#single_cal2').val();
+  var dt2 = $('#single_cal3').val();
+ console.log(dt1);
+ console.log(money);
+ $.ajax({
+          url: '<?=base_url()?>backend/List_dep/list_withdraw2',
+          type: 'POST',
+          dataType: 'json',
+          data: {dt1:dt1,dt2:dt2,money:money},
+        })
+        .done(function(res) {
+          // console.log(res.data.user.date);
+          if (res.code == 1) {
+                      // console.log(res.data);
+            if(res.data.user.length >= 1 ){
+              var conut 	= res.data.user.length;
+              var wd 		= res.data.user;
+              var content = '';
+              var con= '';
+              // console.log(dt1);
+                con += '<div  class="x_title col-9">';
+                con += '<h2>รายการถอน ช่วงจำนวนเงินถอน '+money+' ขึ้นไป'+'</h2>';
+                con += '</div>';
+                content += '<tr  style="background-color: #2a3f54;color: #fff;">';
+                                  content += '<th class="text-center" >ลำดับ</td>';
+                                  content += '<th class="text-center" >User</td>';
+                                  content += '<th class="text-center" >จำนวนถอน</td>';
+                                  content += '<th class="text-center" >วันที่ถอน</td>';
+                                  content += '<th class="text-center" >เวลาที่ถอน</td>';
+                content += '</tr>';
+              for(var i=0; i < conut; i++){
+                var date = new Date(wd[i].dateCreate* 1000).format('d-m-Y');
+                var time = new Date(wd[i].dateCreate* 1000).format('H:i:s');
+                // console.log(wd[i].user);
+                content += '<tr>';
+                                  content += '<td class="text-center">'+(i+1)+' </td>';
+                                  content += '<td class="text-right">'+wd[i].user+' </td>';
+                                  content += '<td class="text-right">'+wd[i].withdraw+' </td>';
+                                  content += '<td class="text-right">'+date+' </td>';
+                                  content += '<td class="text-right">'+time+' </td>';
+                content += '</tr>';
+             }
+            }else{
+              var content = 'No data';
+            }
+            // $('#bodysum').html(sum);
+            $('#bodytrdep').html(content);
+            $('#list').html(con);
+            // $('#head').html(content);
+          }else{
+            swal(res.title,res.msg,'error');
+          }
+          $('#cover-spin1').hide();
+          
+        })
+        .fail(function() {
+          console.log("error");
+        });
+}
+</script>

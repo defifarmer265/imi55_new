@@ -1,0 +1,83 @@
+.bg-body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(105deg, #0e131f 0, #f5c152 50%, #25fd37 0);
+    /* background: url('../img/newbg.jpg'); */
+    font-family: sukhumvit_setmedium, sans-serif;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    font-size: 15px;
+    min-height: 100%;
+    height: 100vh;
+}
+
+h1.hiallbet {
+    background-image: url(https://media.giphy.com/media/l0MYwXxKiwW39Dwcw/giphy.gif);
+    background-size: cover;
+    text-shadow: 10px 10px 20px #000;
+    color: transparent;
+    -moz-background-clip: text;
+    -webkit-background-clip: text;
+    text-transform: uppercase;
+    font-size: 30px;
+    line-height: 0.75;
+    margin: 10px 0;
+}
+
+.hMaYnt {
+    color: rgb(202, 31, 31);
+    background-color: #6647ee;
+    background-image: linear-gradient(rgb(243 209 2) 0%, #08f100 100%);
+    font-size: 1.2rem;
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 15px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 10px;
+    border-radius: 0.625rem;
+}
+
+.input-group-text {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #169816;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.form-control {
+    border-color: #fffffe;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #131c29;
+    color: #fff;
+    border-bottom: 1px solid #403736;
+}
+
+.btn-outline-light {
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.modal-repsw {
+    background-image: linear-gradient(to right top, #130404, #930000, #930000, #0215ad, #480c18, #480c18, #930000, #480c18, #0215ad, #930000, #930000, #130404);
+}
+
+.modal-report {
+    background-image: linear-gradient(to right top, #130404, #930000, #930000, #0215ad, #480c18, #480c18, #930000, #480c18, #0215ad, #930000, #930000, #130404);
+}

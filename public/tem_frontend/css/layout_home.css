@@ -1,0 +1,605 @@
+@font-face {
+	font-family: KAMPANATH;
+	src: url('../font/PSL-KANDA.TTF');
+}
+
+@font-face {
+   font-family: PSL-NORMAL;
+   src: url('../font/PSL-NORMAL.TTF');
+}
+
+@font-face {
+   font-family: PSL-NORMAL;
+   src: url('../font/PSL-NORMAL.TTF');
+}
+
+.img-responsive {
+	width:100%;
+}
+
+.font-weight-lighter {
+   font-family: KAMPANATH !important;
+   font-weight: normal !important
+}
+
+.font-weight-normal {
+   font-family: PSL-NORMAL !important;
+   font-weight: normal !important;
+}
+
+.font-weight-bold {
+   font-family: PSL-BOLD !important;
+   font-weight: normal !important;
+}
+
+.font-bold {
+   font-weight: bold !important;
+}
+
+.btn-danger {
+   background: #d9534e;
+   font-family: inherit;
+   font-size: 1.1em;
+   font-weight: bold;
+   padding:3px 3px;
+}
+
+.btn-success {
+   background: #3ed78d;
+   font-family: inherit;
+   font-size: 1.1em;
+   font-weight: bolder;
+   padding:3px 3px;
+}
+
+.btn-secondary {
+	/* background: #18202D; */
+	background: linear-gradient(to top,#131926 0%,#1C2743 100%);
+}
+
+.text-gold {
+	color:#ffea77;
+}
+
+.text-gray {
+	color:#ccff00;
+}
+
+body {
+	background: #101622;
+   background-attachment: fixed;
+   font-family: PSL-NORMAL;
+   font-size: 1.2em;
+}
+
+header .sidebar-right img {
+	max-width: 33px;
+}
+
+body > div.sidebar-right {
+	background: linear-gradient(45deg,#2567fd 0%,#02050a 100%);
+	border-bottom-left-radius: 85px;
+	box-shadow: 2px 3px 11px 12px rgb(228 255 0 / 28%);
+	padding-top:0px !important;
+	z-index:999;
+}
+
+body > div.sidebar-right ul li {
+	display:flex;
+}
+
+body > div.sidebar-right ul li div {
+	display:flex;
+	justify-content: flex-start;
+	align-content: center;
+}
+
+body > div.sidebar-right ul li img {
+	max-width: 25px;
+}
+
+body > div.sidebar-right ul li div label {
+	font-size:1em;
+	padding:2px 0px;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-home {
+	background: url('../img/sidebar_home_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-home ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-home ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-home {
+	background: url('../img/sidebar_home_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-home {
+	background: url('../img/sidebar_home_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover ,
+body > div.sidebar-right ul li a:hover ,
+body > div.sidebar-right ul li a:hover {
+	background: linear-gradient(to bottom,#131926 0%,#1C2743 100%);;
+}
+
+body > div.sidebar-right ul li a {
+   padding: 0.2em 0px;
+}
+
+body > div.sidebar-right ul li a.active {
+	background: linear-gradient(to bottom,#35465F 0%,#1E2736 100%);
+}
+
+body > div.sidebar-right ul li a.active > div > label {
+	background: -webkit-linear-gradient(#ceaa44 0%,#f0df8e 50%,#e7d17b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;   
+}
+
+body > div.sidebar-right ul li a:hover > div > label ,
+body > div.sidebar-right ul li a:active > div > label ,
+body > div.sidebar-right ul li a:focus > div > label  {
+	color:gold;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-deposit {
+	background: url('../img/sidebar_deposit_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-deposit ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-deposit ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-deposit {
+	background: url('../img/sidebar_deposit_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-deposit {
+	background: url('../img/sidebar_deposit_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+
+body > div.sidebar-right ul li div.sidebar-icon-withdraw {
+	background: url('../img/sidebar_withdraw_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-withdraw ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-withdraw ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-withdraw {
+	background: url('../img/sidebar_withdraw_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-withdraw {
+	background: url('../img/sidebar_withdraw_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-history {
+	background: url('../img/sidebar_history_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-history ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-history ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-history {
+	background: url('../img/sidebar_history_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-history {
+	background: url('../img/sidebar_history_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-treasure-link {
+	background: url('../img/sidebar_treasure_link_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-treasure-link ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-treasure-link ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-treasure-link {
+	background: url('../img/sidebar_treasure_link_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-treasure-link {
+	background: url('../img/sidebar_treasure_link_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-sport {
+	background: url('../img/sidebar_sport_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-sport ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-sport ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-sport {
+	background: url('../img/sidebar_sport_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-sport {
+	background: url('../img/sidebar_sport_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-casino {
+	background: url('../img/sidebar_casino_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-casino ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-casino ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-casino {
+	background: url('../img/sidebar_casino_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-casino {
+	background: url('../img/sidebar_casino_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-slot {
+	background: url('../img/sidebar_slot_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-slot ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-slot ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-slot {
+	background: url('../img/sidebar_slot_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-slot {
+	background: url('../img/sidebar_slot_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-cards {
+	background: url('../img/sidebar_cards_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-cards ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-cards ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-cards {
+	background: url('../img/sidebar_cards_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-cards {
+	background: url('../img/sidebar_cards_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-lotte {
+	background: url('../img/sidebar_lotte_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-lotte ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-lotte ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-lotte {
+	background: url('../img/sidebar_lotte_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-lotte {
+	background: url('../img/sidebar_lotte_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-account {
+	background: url('../img/sidebar_account_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-account ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-account ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-account {
+	background: url('../img/sidebar_account_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-account {
+	background: url('../img/sidebar_account_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-chgpass {
+	background: url('../img/sidebar_chgpass_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-chgpass ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-chgpass ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-chgpass {
+	background: url('../img/sidebar_chgpass_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-chgpass {
+	background: url('../img/sidebar_chgpass_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li div.sidebar-icon-logout {
+	background: url('../img/sidebar_logout_gray.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+body > div.sidebar-right ul li a:hover > div > div.sidebar-icon-logout ,
+body > div.sidebar-right ul li a:active > div > div.sidebar-icon-logout ,
+body > div.sidebar-right ul li a:focus > div > div.sidebar-icon-logout {
+	background: url('../img/sidebar_logout_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+body > div.sidebar-right ul li a.active > div > div.sidebar-icon-logout {
+	background: url('../img/sidebar_logout_gold.png') no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+
+.header-nav-logo {
+	max-width:200px;
+}
+
+.header-nav-icon {
+	max-width:30px;
+}
+
+.header-nav-icon img {
+	max-width:23px;
+}
+
+.header-nav-icon label {
+	font-size: 0.7em;
+   line-height: 1.1em;
+   font-weight: bold;
+}
+
+.text-golden {
+  background: -webkit-linear-gradient(#f5eaba,#D0AE53);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;	
+}
+
+footer.navbar-fixed {
+	position: fixed;
+	bottom:0;
+	left:0;
+   z-index: 9;
+}
+
+footer > .nav-footer {
+	background: linear-gradient(to top,#1b294c 0%,#033ab3 100%);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+footer ul.nav-bottom-bar li a {
+	display:flex;
+	flex-direction: column;
+   justify-content: space-around;
+	/*justify-content: flex-end;*/
+	align-items: center;
+	height: 100%;
+   padding: 0.3em 0.3em !important;
+}
+
+footer ul.nav-bottom-bar li a img {
+	max-width: 50px;
+   height: 50px;
+}
+
+footer ul.nav-bottom-bar li:nth-child(3) a:first-child {
+	/*background:linear-gradient(to bottom,#131926 0%,#1C2743 100%);*/
+	background-image: url(../img/imilogin.png);
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+	border-radius: 50px;
+	position: relative;
+   top:-29px;
+   padding: 5px 13px !important;
+   max-width:77px;
+   margin:0 auto;
+   box-shadow: 0px 2px 9px 1px rgba(0,0,0,0.4);
+}
+
+footer ul.nav-bottom-bar li:nth-child(3) a.logo-modifiled:first-child {
+	background:transparent;
+	box-shadow: unset;
+}
+
+footer ul.nav-bottom-bar li:nth-child(3) a:first-child img {
+   max-width: 46px;
+   width: 46px;
+   height: auto;
+}
+
+footer ul.nav-bottom-bar li:nth-child(3) a.logo-modifiled:first-child img {
+	max-width: 80px;
+   width: 80px;
+}
+
+footer ul.nav-bottom-bar li:nth-child(3) a:second-child img {
+   opacity: 0;
+}
+
+footer ul.nav-bottom-bar li a label {
+	font-size: 0.93em;
+	color:white;
+	margin-bottom: 0px;
+   white-space: nowrap;
+   font-weight: 900;
+}
+
+.text-black {
+   color:black !important;
+}
+
+.full-width {
+   width:100%;
+}
+
+.full-height {
+   height:100%;
+}
+
+.box-shadow-unset {
+   box-shadow: unset;
+}
+
+.font-2-0 {
+   font-size: 2.0em !important;
+}
+
+.font-1-9 {
+   font-size: 1.9em !important;
+}
+
+.font-1-8 {
+   font-size: 1.8em !important;
+}
+
+.font-1-7 {
+   font-size: 1.7em !important;
+}
+
+.font-1-6 {
+   font-size: 1.6em !important;
+}
+
+.font-1-5 {
+   font-size: 1.5em !important;
+}
+
+.font-1-4 {
+   font-size: 1.4em !important;
+}
+
+.font-1-3 {
+   font-size: 1.3em !important;
+}
+
+.font-1-2 {
+   font-size: 1.2em !important;
+}
+
+.font-1-1 {
+   font-size: 1.1em !important;
+}
+
+.font-1-0 {
+   font-size: 1em !important;
+}
+
+.font-0-9 {
+   font-size: 0.9em !important;
+}
+
+.font-0-8 {
+   font-size: 0.8em !important;
+}
+
+.font-0-7 {
+   font-size: 0.7em !important;
+}
+
+.font-0-6 {
+   font-size: 0.6em !important;
+}
+
+.font-0-5 {
+   font-size: 0.5em !important;
+}
+
+.line-height-1-5 {
+   line-height: 1.5em !important;
+}
+
+.line-height-1-4 {
+   line-height: 1.4em !important;
+}
+
+.line-height-1-3 {
+   line-height: 1.3em !important;
+}
+
+.line-height-1-2 {
+   line-height: 1.2em !important;
+}
+
+.line-height-1-1 {
+   line-height: 1.1em !important;
+}
+
+.line-height-1-0 {
+   line-height: 1.0em !important;
+}
+
+.line-height-0-9 {
+   line-height: 0.9em !important;
+}
+
+.line-height-0-8 {
+   line-height: 0.8em !important;
+}
+
+.line-height-0-7 {
+   line-height: 0.7em !important;
+}
+
+.line-height-0-6 {
+   line-height: 0.6em !important;
+}
+
+.line-height-0-5 {
+   line-height: 0.5em !important;
+}
+
+.font-inherit {
+   font-family: inherit;
+}
+
+.text-shadow {
+   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+} 

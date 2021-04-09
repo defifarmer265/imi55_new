@@ -1,0 +1,127 @@
+<!-- page content -->
+<style>
+@media only screen and (max-width: 300px) {
+    .mmm {
+        position: absolute;
+        bottom: -1079%;
+        left: 0%;
+        right: 0%;
+    }
+}
+</style>
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="dashboard_graph">
+                    <div class="row x_title">
+                        <div class="col-md-6">
+                        <form action="search_chart_today" method="post">
+                                <div class="row ">
+                                    <div class="col-sm-3 ">
+                                    เลือกค้นหาวันที่
+                                    <fieldset>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <div class="col-md-12 xdisplay_inputx form-group row has-feedback">
+                                                <input type="text" class="form-control has-feedback-left" name ="dt1" id="single_cal2" placeholder="First Name" aria-describedby="inputSuccess2Status2">
+                                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                                <span id="inputSuccess2Status2" class="sr-only">(success)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <br>
+                                        <button type="submit" class="btn btn-info">ค้นหา</button>
+
+                                    </div>
+                                
+                                </div>
+                        </form>
+                            <h3>กราฟฝากถอนรายวัน แบบช่วงเวลา <smal>ประจำวัน  <?php echo date('d/m/Y'); ?></smal></h3>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn" style="background-color:#6fff1e;"></button>
+                            ยอดฝาก<br>
+                            <button type="button" class="btn" style="background-color:#e81d1d;"></button>
+                            ยอดถอน<br>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 ">
+                        <div class="spinner-grow text-primary text-center ml-5 " role="status" id="loadg" hidden>
+                            <span class="sr-only text-center">Loading...</span>
+                        </div>
+                        <canvas id="chLine" height="100"></canvas>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />
+<div class="row"> </div>
+
+<!-- /page content -->
+
+<script>
+setTimeout(() => {
+    if ("undefined" != typeof $.plot) {
+      
+        // chart colors
+        // 01 สีส้ม 02 สีฟ้า
+        var colors = ['ffa43ecc', '#4acef0e0','#4acef0e0','#dfeffc','#dbe1cf'];
+
+        /* large line chart */
+        var chLine = document.getElementById("chLine");
+        var chartData = {
+            labels: ["00:00-00:59", "01.00-01:59", "02:00-02:59", "03:00-03:59", "04:00-04:59", "05:00-05:59", "06:00-06:59","07:00:07:59","08:00-08:59","09:00-09:59","10:00-10:59"
+            ,"11:00-11:59","12:00-12:59","13:00-13:59", "14:00-14:59","15:00-15:59","16:00-16:59","17:00-17:59","18:00-18:59","19:00-19:59","20:00-20;59","21:00-21:59"
+            ,"22:00-22:59","23:00-23:59"
+                ],
+            datasets: [{
+                //    data: ['1000','2000','350','400','350','600','800'],
+                   data: [<?= $withdrawJS; ?>],
+                   backgroundColor: "rgba(236,123,123,0.2)",
+                   borderColor: "#e81d1d",
+                 
+                },
+
+                {
+                   
+                   data: [<?= $depositJS; ?>],
+                   backgroundColor: "rgba(189,247,157,0.2)",
+                   borderColor: "#6fff1e",
+                   
+                }
+
+            ]
+        };
+
+        if (chLine) {
+            new Chart(chLine, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: false
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            });
+        }
+        // $("#newchart").length && (console.log("Plot1"), $.plot($("#newchart"), [a, b], g));
+    }
+
+}, 100);
+</script>
